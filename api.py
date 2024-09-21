@@ -53,39 +53,38 @@ class Modelmine:
         self.image_processor = image_processor
         self.context_len = context_len
 
-    def response(self,user_prompt,image_path):
-        image_files = [os.path.join(image_path, file) for file in os.listdir(image_path) if
-                       file.endswith(('jpg', 'jpeg', 'png'))]
 
-        print(image_files)
 
-        # 加载所有图片
-        images = load_images(image_files)
-        print(images)
-        if not images:  # 处理 images 为空或为 None 的情况
-            image_tensor = None
-            image_sizes = [0]
+    def response(self, user_prompt, image_path):
+        if image_path and os.path.exists(image_path):
+            image_files = [os.path.join(image_path, file) for file in os.listdir(image_path) if
+                           file.endswith(('jpg', 'jpeg', 'png'))]
         else:
+            image_files = []
+
+        print(f"Image files: {image_files}")
+
+        if not image_files:
+            # No images found, process text-only input
+            input_ids = self.tokenizer(user_prompt, return_tensors='pt').input_ids.to(self.model.device)
+            image_tensor = None
+            image_sizes = None
+        else:
+            # Process images
+            images = load_images(image_files)
+            print(f"Loaded images: {images}")
             image_sizes = [image.size for image in images]
             image_tensor = process_images(images, self.image_processor, self.model.config)
 
-        print(images)
-        if image_tensor is not None:
-            if isinstance(image_tensor, list):
-                image_tensor = [img.to(self.model.device, dtype=torch.float16) for img in image_tensor]
-            else:
-                image_tensor = image_tensor.to(self.model.device, dtype=torch.float16)
+            if image_tensor is not None:
+                if isinstance(image_tensor, list):
+                    image_tensor = [img.to(self.model.device, dtype=torch.float16) for img in image_tensor]
+                else:
+                    image_tensor = image_tensor.to(self.model.device, dtype=torch.float16)
 
-        try:
-            inp = user_prompt
-        except EOFError:
-            inp = ""
-        if not inp:
-            print("exit...")
+            input_ids = tokenizer_image_token(user_prompt, self.tokenizer, IMAGE_TOKEN_INDEX,
+                                              return_tensors='pt').unsqueeze(0).to(self.model.device)
 
-
-        input_ids = tokenizer_image_token(user_prompt, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors='pt').unsqueeze(0).to(
-            self.model.device)
         streamer = TextStreamer(self.tokenizer, skip_prompt=True, skip_special_tokens=True)
         args = Args()
 
@@ -100,31 +99,33 @@ class Modelmine:
                 streamer=streamer,
                 use_cache=True)
 
-        outputs = self.tokenizer.decode(output_ids[0]).strip()
-        outputs = (outputs[4:-4])
+        outputs = self.tokenizer.decode(output_ids[0], skip_special_tokens=True).strip()
         return outputs
 
 
-@app.get("/llava")
+@app.post("/llava")
 async def llava(request: Request):
-    params = await request.json()
-    print(params)
+    try:
+        params = await request.json()
+        print(params)
 
-    image_path = params.get('images_path')
-    prompt = params.get('prompt', '')
+        image_path = params.get('images_path')
+        prompt = params.get('prompt', '')
 
-    pattern = re.compile(r"USER:.*", re.DOTALL)
-    match = pattern.search(prompt)
+        pattern = re.compile(r"USER:.*", re.DOTALL)
+        match = pattern.search(prompt)
 
-    user_prompt = match.group() if match else ""
+        user_prompt = match.group() if match else prompt  # Use the whole prompt if no USER: is found
 
-    print("Extracted USER part:")
-    print(user_prompt)
-    print(image_path)
+        print("Extracted USER part:")
+        print(user_prompt)
+        print(f"Image path: {image_path}")
 
-    response = model.response(user_prompt, image_path)
-
-    return response
+        response = model.response(user_prompt, image_path)
+        return response
+    except Exception as e:
+        print(f"Error in /llava endpoint: {e}")
+        return {"error": str(e)}
 
 model = Modelmine()
 uvicorn.run(app, host='127.0.0.1', port=8001)

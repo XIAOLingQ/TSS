@@ -28,8 +28,7 @@ disable_btn = gr.Button(interactive=False)
 moderation_msg = "YOUR INPUT VIOLATES OUR CONTENT MODERATION GUIDELINES. PLEASE TRY AGAIN."
 
 
-def add_text(state, text, image, image_process_mode, Frist_chat):
-    # 如果state是None，初始化它
+def add_text(state, text, image, image_process_mode):
     if state is None:
         state = default_conversation.copy()
 
@@ -37,24 +36,21 @@ def add_text(state, text, image, image_process_mode, Frist_chat):
         state.skip_next = True
         return (state, state.to_gradio_chatbot(), "", None) + (no_change_btn,) * 6
 
-    # if args.moderate:
     text = text[:1536]  # Hard cut-off
 
     if image is not None:
         text = text[:1200]  # Hard cut-off for images
-        if '<image>' not in text and Frist_chat is True:
-            # text = '<Image><image></Image>' + text
-            Frist_chat = False
-            text = text + '\n<image>'
         if '<image>' not in text:
-            # text = '<Image><image></Image>' + text
             text = text + '\n<image>'
         text = (text, image, image_process_mode)
+    else:
+        # No image provided, just use the text
+        pass
 
     state.append_message(state.roles[0], text)
     state.skip_next = False
     print(state)
-    return (state, state.to_gradio_chatbot(), None, None) + (no_change_btn,) * 6
+    return (state, state.to_gradio_chatbot(), "", None) + (no_change_btn,) * 6
 
 
 def delete_all_files_in_folder(folder_path):
@@ -198,13 +194,20 @@ def generate_image_from_last_response(chat_history):
         return generate_image(last_response)
     return None
 
+
 def resllava(state, model_selector, temperature, top_p, max_new_tokens, request: gr.Request):
     prompt = state.get_prompt()
+    print(prompt)
     folder_path = 'yolo_pimages'
     delete_all_files_in_folder(folder_path)
     images = state.get_images(return_pil=True)
-    for image in images:
-        run_yolo(image)
+
+    if images:
+        for image in images:
+            run_yolo(image)
+        images_path = folder_path
+    else:
+        images_path = None
 
     pload = {
         "prompt": prompt,
@@ -212,16 +215,23 @@ def resllava(state, model_selector, temperature, top_p, max_new_tokens, request:
         "top_p": float(top_p),
         "max_new_tokens": min(int(max_new_tokens), 1536),
         "stop": state.sep if state.sep_style in [SeparatorStyle.SINGLE, SeparatorStyle.MPT] else state.sep2,
-        "images_path": f'{folder_path}',
+        "images_path": images_path,
     }
-    response = requests.get(reqhost+"/llava", json=pload, stream=True, timeout=100)
-    res = response.text
-    res = ast.literal_eval(res)
-    print(res)
-    print(type(res))
-    state.append_message(state.roles[1], res)
-    print(state)
-    return (state, state.to_gradio_chatbot()) + (no_change_btn,) * 6
+    try:
+        response = requests.post(reqhost + "/llava", json=pload, timeout=100)
+        res = response.json()
+        if not res or res == 'None':
+            res = "I'm sorry, but I couldn't generate a response. Could you please try rephrasing your question or providing more context?"
+        print(f"Response: {res}")
+        print(f"Response type: {type(res)}")
+        state.append_message(state.roles[1], res)
+        print(state)
+        return (state, state.to_gradio_chatbot()) + (no_change_btn,) * 6
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        error_message = "An error occurred while processing your request. Please try again."
+        state.append_message(state.roles[1], error_message)
+        return (state, state.to_gradio_chatbot()) + (no_change_btn,) * 6
 
 
 
@@ -257,8 +267,8 @@ def build_demo(embed_mode, cur_dir=None, concurrency_count=10):
                     cur_dir = os.path.dirname(os.path.abspath(__file__))
 
                 gr.Examples(examples=[
-                    [f"OIP-C.jpg", "What is unusual about this image?"],
-                    [f"OIP-C.jpg", "What are the things I should be cautious about when I visit here?"]
+                    [f"1.jpeg", "How about this Tibetan costume."],
+                    [f"2.jpg", "Describe the Miao costumes in the picture."]
                 ], inputs=[imagebox, textbox])
 
                 with gr.Accordion("Parameters", open=False) as parameter_row:
