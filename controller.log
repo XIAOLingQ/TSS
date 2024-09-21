@@ -1,0 +1,25 @@
+2024-08-06 14:25:29 | INFO | controller | args: Namespace(host='0.0.0.0', port=20000, dispatch_method='shortest_queue')
+2024-08-06 14:25:29 | INFO | controller | Init controller
+2024-08-06 14:25:29 | ERROR | stderr | [32mINFO[0m:     Started server process [[36m24776[0m]
+2024-08-06 14:25:29 | ERROR | stderr | [32mINFO[0m:     Waiting for application startup.
+2024-08-06 14:25:29 | ERROR | stderr | [32mINFO[0m:     Application startup complete.
+2024-08-06 14:25:29 | ERROR | stderr | [32mINFO[0m:     Uvicorn running on [1mhttp://0.0.0.0:20000[0m (Press CTRL+C to quit)
+2024-08-06 14:25:40 | INFO | stdout | [32mINFO[0m:     127.0.0.1:59110 - "[1mPOST /refresh_all_workers HTTP/1.1[0m" [32m200 OK[0m
+2024-08-06 14:25:40 | INFO | stdout | [32mINFO[0m:     127.0.0.1:59111 - "[1mPOST /list_models HTTP/1.1[0m" [32m200 OK[0m
+2024-08-06 14:25:40 | INFO | controller | Register a new worker: http://localhost:40000
+2024-08-06 14:25:40 | INFO | controller | Register done: http://localhost:40000, {'model_names': ['llava-v1.5-7b'], 'speed': 1, 'queue_length': 0}
+2024-08-06 14:25:40 | INFO | stdout | [32mINFO[0m:     127.0.0.1:59128 - "[1mPOST /register_worker HTTP/1.1[0m" [32m200 OK[0m
+2024-08-06 14:25:55 | INFO | controller | Receive heart beat. http://localhost:40000
+2024-08-06 14:25:55 | INFO | stdout | [32mINFO[0m:     127.0.0.1:59172 - "[1mPOST /receive_heart_beat HTTP/1.1[0m" [32m200 OK[0m
+2024-08-06 14:26:08 | INFO | controller | Register a new worker: http://localhost:40000
+2024-08-06 14:26:08 | INFO | controller | Register done: http://localhost:40000, {'model_names': ['llava-v1.5-7b'], 'speed': 1, 'queue_length': 0}
+2024-08-06 14:26:08 | INFO | stdout | [32mINFO[0m:     127.0.0.1:59220 - "[1mPOST /refresh_all_workers HTTP/1.1[0m" [32m200 OK[0m
+2024-08-06 14:26:08 | INFO | stdout | [32mINFO[0m:     127.0.0.1:59222 - "[1mPOST /list_models HTTP/1.1[0m" [32m200 OK[0m
+2024-08-06 14:26:09 | INFO | controller | names: ['http://localhost:40000'], queue_lens: [0.0], ret: http://localhost:40000
+2024-08-06 14:26:09 | INFO | stdout | [32mINFO[0m:     127.0.0.1:59224 - "[1mPOST /get_worker_address HTTP/1.1[0m" [32m200 OK[0m
+2024-08-06 14:26:10 | INFO | controller | Receive heart beat. http://localhost:40000
+2024-08-06 14:26:10 | INFO | stdout | [32mINFO[0m:     127.0.0.1:59236 - "[1mPOST /receive_heart_beat HTTP/1.1[0m" [32m200 OK[0m
+2024-08-06 14:26:21 | ERROR | stderr | [32mINFO[0m:     Shutting down
+2024-08-06 14:26:21 | ERROR | stderr | [32mINFO[0m:     Waiting for application shutdown.
+2024-08-06 14:26:21 | ERROR | stderr | [32mINFO[0m:     Application shutdown complete.
+2024-08-06 14:26:21 | ERROR | stderr | [32mINFO[0m:     Finished server process [[36m24776[0m]

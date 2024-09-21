@@ -1,0 +1,130 @@
+2024-08-06 14:25:03 | INFO | gradio_web_server | args: Namespace(host='0.0.0.0', port=None, controller_url='http://localhost:20000', concurrency_count=16, model_list_mode='reload', share=True, moderate=False, embed=False)
+2024-08-06 14:25:07 | ERROR | stderr | Traceback (most recent call last):
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\urllib3\connection.py", line 196, in _new_conn
+2024-08-06 14:25:07 | ERROR | stderr |     sock = connection.create_connection(
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+2024-08-06 14:25:07 | ERROR | stderr |     raise err
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+2024-08-06 14:25:07 | ERROR | stderr |     sock.connect(sa)
+2024-08-06 14:25:07 | ERROR | stderr | ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+2024-08-06 14:25:07 | ERROR | stderr | 
+2024-08-06 14:25:07 | ERROR | stderr | The above exception was the direct cause of the following exception:
+2024-08-06 14:25:07 | ERROR | stderr | 
+2024-08-06 14:25:07 | ERROR | stderr | Traceback (most recent call last):
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\urllib3\connectionpool.py", line 789, in urlopen
+2024-08-06 14:25:07 | ERROR | stderr |     response = self._make_request(
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\urllib3\connectionpool.py", line 495, in _make_request
+2024-08-06 14:25:07 | ERROR | stderr |     conn.request(
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\urllib3\connection.py", line 398, in request
+2024-08-06 14:25:07 | ERROR | stderr |     self.endheaders()
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\http\client.py", line 1278, in endheaders
+2024-08-06 14:25:07 | ERROR | stderr |     self._send_output(message_body, encode_chunked=encode_chunked)
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\http\client.py", line 1038, in _send_output
+2024-08-06 14:25:07 | ERROR | stderr |     self.send(msg)
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\http\client.py", line 976, in send
+2024-08-06 14:25:07 | ERROR | stderr |     self.connect()
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\urllib3\connection.py", line 236, in connect
+2024-08-06 14:25:07 | ERROR | stderr |     self.sock = self._new_conn()
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\urllib3\connection.py", line 211, in _new_conn
+2024-08-06 14:25:07 | ERROR | stderr |     raise NewConnectionError(
+2024-08-06 14:25:07 | ERROR | stderr | urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001EDB32669B0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+2024-08-06 14:25:07 | ERROR | stderr | 
+2024-08-06 14:25:07 | ERROR | stderr | The above exception was the direct cause of the following exception:
+2024-08-06 14:25:07 | ERROR | stderr | 
+2024-08-06 14:25:07 | ERROR | stderr | Traceback (most recent call last):
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\requests\adapters.py", line 667, in send
+2024-08-06 14:25:07 | ERROR | stderr |     resp = conn.urlopen(
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\urllib3\connectionpool.py", line 843, in urlopen
+2024-08-06 14:25:07 | ERROR | stderr |     retries = retries.increment(
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+2024-08-06 14:25:07 | ERROR | stderr |     raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+2024-08-06 14:25:07 | ERROR | stderr | urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=20000): Max retries exceeded with url: /refresh_all_workers (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001EDB32669B0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))
+2024-08-06 14:25:07 | ERROR | stderr | 
+2024-08-06 14:25:07 | ERROR | stderr | During handling of the above exception, another exception occurred:
+2024-08-06 14:25:07 | ERROR | stderr | 
+2024-08-06 14:25:07 | ERROR | stderr | Traceback (most recent call last):
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\runpy.py", line 196, in _run_module_as_main
+2024-08-06 14:25:07 | ERROR | stderr |     return _run_code(code, main_globals, None,
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\runpy.py", line 86, in _run_code
+2024-08-06 14:25:07 | ERROR | stderr |     exec(code, run_globals)
+2024-08-06 14:25:07 | ERROR | stderr |   File "E:\SHENNET\TSS\TSS\llava\serve\gradio_web_server.py", line 455, in <module>
+2024-08-06 14:25:07 | ERROR | stderr |     models = get_model_list()
+2024-08-06 14:25:07 | ERROR | stderr |   File "E:\SHENNET\TSS\TSS\llava\serve\gradio_web_server.py", line 39, in get_model_list
+2024-08-06 14:25:07 | ERROR | stderr |     ret = requests.post(args.controller_url + "/refresh_all_workers")
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\requests\api.py", line 115, in post
+2024-08-06 14:25:07 | ERROR | stderr |     return request("post", url, data=data, json=json, **kwargs)
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\requests\api.py", line 59, in request
+2024-08-06 14:25:07 | ERROR | stderr |     return session.request(method=method, url=url, **kwargs)
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\requests\sessions.py", line 589, in request
+2024-08-06 14:25:07 | ERROR | stderr |     resp = self.send(prep, **send_kwargs)
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\requests\sessions.py", line 703, in send
+2024-08-06 14:25:07 | ERROR | stderr |     r = adapter.send(request, **kwargs)
+2024-08-06 14:25:07 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\requests\adapters.py", line 700, in send
+2024-08-06 14:25:07 | ERROR | stderr |     raise ConnectionError(e, request=request)
+2024-08-06 14:25:07 | ERROR | stderr | requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=20000): Max retries exceeded with url: /refresh_all_workers (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001EDB32669B0>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))
+2024-08-06 14:25:40 | INFO | gradio_web_server | args: Namespace(host='0.0.0.0', port=None, controller_url='http://localhost:20000', concurrency_count=16, model_list_mode='reload', share=True, moderate=False, embed=False)
+2024-08-06 14:25:40 | INFO | gradio_web_server | Models: []
+2024-08-06 14:25:40 | INFO | gradio_web_server | Namespace(host='0.0.0.0', port=None, controller_url='http://localhost:20000', concurrency_count=16, model_list_mode='reload', share=True, moderate=False, embed=False)
+2024-08-06 14:25:40 | ERROR | stderr | D:\Anaconda\envs\tss\lib\site-packages\gradio\components\dropdown.py:188: UserWarning: The value passed into gr.Dropdown() is not in the list of choices. Please update the list of choices to include:  or set allow_custom_value=True.
+2024-08-06 14:25:40 | ERROR | stderr |   warnings.warn(
+2024-08-06 14:25:40 | INFO | stdout | Running on local URL:  http://0.0.0.0:7860
+2024-08-06 14:25:41 | INFO | httpx | HTTP Request: GET http://localhost:7860/startup-events "HTTP/1.1 200 OK"
+2024-08-06 14:25:41 | INFO | httpx | HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2024-08-06 14:25:41 | INFO | httpx | HTTP Request: GET https://checkip.amazonaws.com/ "HTTP/1.1 200 "
+2024-08-06 14:25:43 | INFO | httpx | HTTP Request: HEAD http://localhost:7860/ "HTTP/1.1 200 OK"
+2024-08-06 14:25:47 | INFO | httpx | HTTP Request: GET https://api.gradio.app/v2/tunnel-request "HTTP/1.1 200 OK"
+2024-08-06 14:25:48 | INFO | stdout | Running on public URL: https://9e634ae484585034d7.gradio.live
+2024-08-06 14:25:48 | INFO | stdout | 
+2024-08-06 14:25:48 | INFO | stdout | This share link expires in 72 hours. For free permanent hosting and GPU upgrades, run `gradio deploy` from Terminal to deploy to Spaces (https://huggingface.co/spaces)
+2024-08-06 14:26:08 | INFO | gradio_web_server | load_demo. ip: 127.0.0.1
+2024-08-06 14:26:08 | INFO | gradio_web_server | Models: ['llava-v1.5-7b']
+2024-08-06 14:26:09 | INFO | gradio_web_server | add_text. ip: 127.0.0.1. len: 33
+2024-08-06 14:26:09 | ERROR | stderr | Traceback (most recent call last):
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\gradio\queueing.py", line 536, in process_events
+2024-08-06 14:26:09 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\gradio\route_utils.py", line 285, in call_process_api
+2024-08-06 14:26:09 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\gradio\blocks.py", line 1933, in process_api
+2024-08-06 14:26:09 | ERROR | stderr |     data = await self.postprocess_data(block_fn, result["prediction"], state)
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\gradio\blocks.py", line 1705, in postprocess_data
+2024-08-06 14:26:09 | ERROR | stderr |     self.validate_outputs(block_fn, predictions)  # type: ignore
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\gradio\blocks.py", line 1679, in validate_outputs
+2024-08-06 14:26:09 | ERROR | stderr |     raise ValueError(
+2024-08-06 14:26:09 | ERROR | stderr | ValueError: An event handler (add_text) didn't receive enough output values (needed: 9, received: 1).
+2024-08-06 14:26:09 | ERROR | stderr | Wanted outputs:
+2024-08-06 14:26:09 | ERROR | stderr |     [<gradio.components.state.State object at 0x000001C3150ABA60>, <gradio.components.chatbot.Chatbot object at 0x000001C3151A57E0>, <gradio.components.textbox.Textbox object at 0x000001C315075B70>, <gradio.components.image.Image object at 0x000001C3151A5240>, <gradio.components.button.Button object at 0x000001C3151CC940>, <gradio.components.button.Button object at 0x000001C3151CCC40>, <gradio.components.button.Button object at 0x000001C3151CC9A0>, <gradio.components.button.Button object at 0x000001C3151CC5B0>, <gradio.components.button.Button object at 0x000001C3151CCCD0>]
+2024-08-06 14:26:09 | ERROR | stderr | Received outputs:
+2024-08-06 14:26:09 | ERROR | stderr |     [None]
+2024-08-06 14:26:09 | INFO | gradio_web_server | http_bot. ip: 127.0.0.1
+2024-08-06 14:26:09 | INFO | gradio_web_server | model_name: llava-v1.5-7b, worker_addr: http://localhost:40000
+2024-08-06 14:26:09 | INFO | stdout | A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions.
+2024-08-06 14:26:09 | INFO | gradio_web_server | ==== request ====
+{'model': 'llava-v1.5-7b', 'prompt': "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. ", 'temperature': 0.2, 'top_p': 0.7, 'max_new_tokens': 512, 'stop': '</s>', 'images': 'List of 0 images: []'}
+2024-08-06 14:26:09 | ERROR | stderr | Traceback (most recent call last):
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\gradio\queueing.py", line 536, in process_events
+2024-08-06 14:26:09 | ERROR | stderr |     response = await route_utils.call_process_api(
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\gradio\route_utils.py", line 285, in call_process_api
+2024-08-06 14:26:09 | ERROR | stderr |     output = await app.get_blocks().process_api(
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\gradio\blocks.py", line 1923, in process_api
+2024-08-06 14:26:09 | ERROR | stderr |     result = await self.call_function(
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\gradio\blocks.py", line 1520, in call_function
+2024-08-06 14:26:09 | ERROR | stderr |     prediction = await utils.async_iteration(iterator)
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\gradio\utils.py", line 663, in async_iteration
+2024-08-06 14:26:09 | ERROR | stderr |     return await iterator.__anext__()
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\gradio\utils.py", line 656, in __anext__
+2024-08-06 14:26:09 | ERROR | stderr |     return await anyio.to_thread.run_sync(
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\anyio\to_thread.py", line 33, in run_sync
+2024-08-06 14:26:09 | ERROR | stderr |     return await get_asynclib().run_sync_in_worker_thread(
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
+2024-08-06 14:26:09 | ERROR | stderr |     return await future
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\anyio\_backends\_asyncio.py", line 807, in run
+2024-08-06 14:26:09 | ERROR | stderr |     result = context.run(func, *args)
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\gradio\utils.py", line 639, in run_sync_iterator_async
+2024-08-06 14:26:09 | ERROR | stderr |     return next(iterator)
+2024-08-06 14:26:09 | ERROR | stderr |   File "D:\Anaconda\envs\tss\lib\site-packages\gradio\utils.py", line 801, in gen_wrapper
+2024-08-06 14:26:09 | ERROR | stderr |     response = next(iterator)
+2024-08-06 14:26:09 | ERROR | stderr |   File "E:\SHENNET\TSS\TSS\llava\serve\gradio_web_server.py", line 230, in http_bot
+2024-08-06 14:26:09 | ERROR | stderr |     state.messages[-1][-1] = "▌"
+2024-08-06 14:26:09 | ERROR | stderr | IndexError: list index out of range
+2024-08-06 14:26:19 | INFO | stdout | Keyboard interruption in main thread... closing server.
+2024-08-06 14:26:24 | INFO | stdout | Killing tunnel 0.0.0.0:7860 <> https://9e634ae484585034d7.gradio.live
