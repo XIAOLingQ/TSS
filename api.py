@@ -28,12 +28,12 @@ def load_images(image_files):
 
 class Args:
     def __init__(self):
-        self.model_path = "E:\\SHENNET\\TSS\\LLaVA\\llava-v1.5-7b"
+        self.model_path = "./llava-v1.5-7b/"
         self.model_base = None
         self.device = "cuda"
         self.conv_mode = None
-        self.temperature = 0.2
-        self.max_new_tokens = 512
+        self.temperature = 0.9
+        self.max_new_tokens = 800
         self.load_8bit = False
         self.load_4bit = True
         self.debug = False
@@ -65,12 +65,10 @@ class Modelmine:
         print(f"Image files: {image_files}")
 
         if not image_files:
-            # No images found, process text-only input
             input_ids = self.tokenizer(user_prompt, return_tensors='pt').input_ids.to(self.model.device)
             image_tensor = None
             image_sizes = None
         else:
-            # Process images
             images = load_images(image_files)
             print(f"Loaded images: {images}")
             image_sizes = [image.size for image in images]
@@ -115,7 +113,7 @@ async def llava(request: Request):
         pattern = re.compile(r"USER:.*", re.DOTALL)
         match = pattern.search(prompt)
 
-        user_prompt = match.group() if match else prompt  # Use the whole prompt if no USER: is found
+        user_prompt = match.group() if match else prompt
 
         print("Extracted USER part:")
         print(user_prompt)
